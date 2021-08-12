@@ -22,7 +22,7 @@ public class Trabajador {
 	@Column(name = "nombre")
 	private String nombre;
 	@Column(name = "trabajo")
-	private Trabajos trabajo;
+	private String trabajo;
 	@Column (name = "salario")
 	private double salario;
 	@Column (name = "fecha")
@@ -39,12 +39,12 @@ public class Trabajador {
 	 * @param salario: salario del trabajador (depende del puesto)
 	 * @param fecha creacion de la entidad
 	 */
-	public Trabajador(Long id, String nombre, Trabajos trabajo, Date fecha) {
+	public Trabajador(Long id, String nombre, String trabajo, Date fecha) {
 
 		this.id = id;
 		this.nombre = nombre;
 		this.trabajo = trabajo;
-		setSalario(this.getTrabajo());
+		setSalario();
 		this.fecha = fecha;
 	}
 	
@@ -61,27 +61,40 @@ public class Trabajador {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public Trabajos getTrabajo() {
+	public String getTrabajo() {
 		return trabajo;
 	}
-	public void setTrabajo(Trabajos trabajo) {
-		this.trabajo = trabajo;
+	public void setTrabajo(String trabajo) {
+		
+		trabajo = trabajo.toUpperCase();//parametro a mayusculas para comparación
+		boolean trabajoValido = false; // flag que indicará si el parametro esta dentro del enum
+		
+		for (Trabajos validTrabajo : Trabajos.values()) {
+			if (validTrabajo.name().equals(trabajo)) { // si trabajo es igual a uno de los valores del enum trabajoValido = true
+				trabajoValido = true;
+			}
+		}
+		if (trabajoValido) {
+			this.trabajo = trabajo.toLowerCase(); //setea el parametro en minusculas
+		} else {
+			this.trabajo = Trabajos.UNDEFINED.name(); //setea el valor UNDEFINED
+		}
 	}
 	public double getSalario() {
 		return salario;
 	}
-	public void setSalario(Trabajos trabajo) {
-		switch (trabajo) {
-		case ENCARGADO:
+	public void setSalario() {
+		switch (this.trabajo) {
+		case ("encargado"):
 			this.salario = 20000;
 		break;
-		case COORDINADOR:
+		case "coordinador":
 			this.salario = 30000;
 		break;
-		case PEON:
+		case "peon":
 			this.salario = 17000;
 		break;
-		case DIRECTOR:
+		case "director":
 			this.salario = 37000;
 		break;
 		default:
