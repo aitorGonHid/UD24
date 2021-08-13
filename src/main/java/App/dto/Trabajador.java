@@ -44,7 +44,6 @@ public class Trabajador {
 		this.id = id;
 		this.nombre = nombre;
 		this.trabajo = trabajo;
-		setSalario();
 		this.fecha = fecha;
 	}
 	
@@ -76,30 +75,27 @@ public class Trabajador {
 		}
 		if (trabajoValido) {
 			this.trabajo = trabajo.toLowerCase(); //setea el parametro en minusculas
+			this.setSalario(trabajo.toLowerCase());
 		} else {
 			this.trabajo = Trabajos.UNDEFINED.name(); //setea el valor UNDEFINED
+			this.setSalario("undefinded");
 		}
 	}
 	public double getSalario() {
 		return salario;
 	}
-	public void setSalario() {
-		switch (this.trabajo) {
-		case ("encargado"):
-			this.salario = 20000;
-		break;
-		case "coordinador":
-			this.salario = 30000;
-		break;
-		case "peon":
-			this.salario = 17000;
-		break;
-		case "director":
-			this.salario = 37000;
-		break;
-		default:
-			this.salario = 0;
-			break;
+	public void setSalario(String trabajo) {
+		
+		if (trabajo.equals("encargado")) {
+			this.salario = 20000.0;
+		} else if (trabajo.equals("coordinador")) {
+			this.salario = 30000.0;
+		} else if (trabajo.equals("peon")) {
+			this.salario = 17000.0;
+		} else if (trabajo.equals("37000")) {
+			this.salario = 30000.0;
+		} else {
+			this.salario = 1.0;
 		}
 	}
 	

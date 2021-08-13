@@ -25,6 +25,7 @@ public class TrabajadorController {
 	
 	@CrossOrigin(origins = "*")
 	@GetMapping("/trabajadores")
+	//Listar trabajadores
 	public List<Trabajador> listarTrabajadores(){
 		return trabajadorServiceImpl.listarTrabajadores();
 	}
