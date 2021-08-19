@@ -92,10 +92,10 @@ public class Trabajador {
 			this.salario = 30000.0;
 		} else if (trabajo.equals("peon")) {
 			this.salario = 17000.0;
-		} else if (trabajo.equals("37000")) {
-			this.salario = 30000.0;
+		} else if (trabajo.equals("director")) {
+			this.salario = 35000.0;
 		} else {
-			this.salario = 1.0;
+			this.salario = 0.0;
 		}
 	}
 	
